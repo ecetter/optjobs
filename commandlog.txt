@@ -12,6 +12,10 @@ cd ~/scratch
 git clone https://github.com/ecetter/optjobs.git
 cd optjobs
 
+# show task distribution and hostnames
+bash checknodefile.sh
+scontrol show hostname
+
 # load software from software stack
 module load anaconda intel impi
 
@@ -20,3 +24,22 @@ conda create -y -n optjobs_env gdb numpy mpi4py
 
 # activate environment
 conda activate optjobs_env
+
+# debug example
+cd debug_gdb
+make
+./factorial
+
+# monitoring jobs
+squeue -u $(whoami)
+export SQUEUE_FORMAT="%.9i %9P %35j %.8u %.2t %.12M %.12L %.5C %.7m %.4D %R"
+scontrol show job <jobid>
+
+# monitor a job example
+cd ../pi_example
+sbatch submit-pi_serial.slurm
+sbatch submit-pi_parallel.slurm
+squeue -u $(whoami)
+ssh <comp-node-id>
+top -Hu $(whoami)
+ps -aux | grep $(whoami)
