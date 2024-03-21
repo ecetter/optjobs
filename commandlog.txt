@@ -1,0 +1,22 @@
+#
+# Commands for Setting up the Software Environment
+#
+
+# initialize interactive compute session
+salloc -N 2 -n 4 -A open -t 2:00:00
+
+# navigate to scratch
+cd ~/scratch
+
+# download files
+git clone https://github.com/ecetter/optjobs.git
+cd optjobs
+
+# load software from software stack
+module load anaconda intel impi
+
+# create a conda environment for hands-on activities
+conda create -y -n optjobs_env gdb numpy mpi4py
+
+# activate environment
+conda activate optjobs_env
