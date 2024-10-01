@@ -11,7 +11,7 @@
 #SBATCH --output=out/slurm-%x.out
 #SBATCH --error=out/slurm-%x.err
 
-module load anaconda/2023 intel
+module load anaconda/2023 intel impi
 conda activate optjobs_env
 
 srun python pi_parallel.py > out/pi_parallel.out
