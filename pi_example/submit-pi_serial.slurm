@@ -11,7 +11,7 @@
 #SBATCH --output=out/slurm-%x.out
 #SBATCH --error=out/slurm-%x.err
 
-module load anaconda
+module load anaconda/2023
 conda activate optjobs_env
 
 python pi_serial.py > out/pi_serial.out
